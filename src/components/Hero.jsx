@@ -14,9 +14,12 @@ import {
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { motion } from "framer-motion";
 
+
+const sections = ['about', 'timeline', 'prizes', 'faq'];
+
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const sections = ['about', 'timeline', 'prizes', 'faq'];
+  // const sections = ['about', 'timeline', 'prizes', 'faq'];
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
@@ -59,7 +62,7 @@ export default function Hero() {
     });
 
     return () => observer.disconnect();
-  }, [sections]);
+  }, []);
 
   return (
     <Box
