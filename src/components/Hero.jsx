@@ -59,7 +59,7 @@ export default function Hero() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   return (
     <Box
