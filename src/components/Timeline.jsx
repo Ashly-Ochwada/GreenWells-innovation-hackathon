@@ -8,14 +8,14 @@ const timelineItems = [
     date: 'July 2025',
     title: 'Launch & Recruitment',
     description:
-      'Website setup, campaign launch, proposal submissions. Outreach to universities. Proposal deadline: Aug 13.',
+      'Website setup, campaign launch, proposal submissions. Outreach to universities. .',
     color: '#00AEEF',
   },
   {
     date: 'August 2025',
     title: 'Selection & Onboarding',
     description:
-      'Proposal review, finalist selection, orientation webinar, team documentation and welcome kits.',
+      'Proposal review,  orientation webinar, team documentation and welcome kits.',
     color: '#7CD338',
   },
   {

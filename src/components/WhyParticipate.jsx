@@ -76,7 +76,6 @@ export default function WhyParticipate() {
             mb: 6,
             fontWeight: 700,
             color: '#FFFFFF',
-            fontFamily: 'cursive',
             '&::after': {
               content: '""',
               display: 'block',
