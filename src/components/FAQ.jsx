@@ -8,13 +8,10 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TextField,
-  InputAdornment,
   Stack,
   useTheme,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SearchIcon from '@mui/icons-material/Search';
 import faqImage from '../assets/faq-illustration.png'; // make sure you have this
 
 const faqItems = [
@@ -46,9 +43,6 @@ const faqItems = [
 ];
 
 export default function FAQ() {
-  const theme = useTheme();
-  const [search, setSearch] = useState('');
-
   const filteredFaqs = faqItems.filter((item) =>
     item.question.toLowerCase().includes(search.toLowerCase())
   );
@@ -84,29 +78,7 @@ export default function FAQ() {
           ❓ Frequently Asked Questions
         </Typography>
 
-        {/* Search Field */}
-        {/* <Box sx={{ maxWidth: 700, mx: 'auto', mb: 6 }}>
-          <TextField
-            fullWidth
-            placeholder="Search your question..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#00AEEF' }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              backgroundColor: '#fff',
-              borderRadius: 14,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-              '& fieldset': { border: 'none' },
-            }}
-          />
-        </Box> */}
-
+     
         {/* FAQ Content */}
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
           {/* Left Side Image */}
