@@ -11,7 +11,6 @@ import {
   TextField,
   InputAdornment,
   Stack,
-  useTheme,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
