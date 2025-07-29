@@ -5,135 +5,183 @@ import { motion } from 'framer-motion';
 
 const timelineItems = [
   {
-    date: 'August 1, 2025',
-    title: 'Registration Opens',
-    description: 'Early bird perks available',
+    date: 'July 2025',
+    title: 'Launch & Recruitment',
+    description:
+      'Website setup, campaign launch, proposal submissions. Outreach to universities. Proposal deadline: Aug 13.',
+    color: '#00AEEF',
   },
   {
-    date: 'September 23, 2025',
-    title: 'Hackathon Kickoff',
-    description: '48-hour innovation sprint begins',
+    date: 'August 2025',
+    title: 'Selection & Onboarding',
+    description:
+      'Proposal review, finalist selection, orientation webinar, team documentation and welcome kits.',
+    color: '#7CD338',
   },
   {
-    date: 'November 29, 2025',
-    title: 'Demo Day & Winners',
-    description: 'Final presentations and award ceremony',
+    date: 'September 2025',
+    title: 'Capacity Building',
+    description:
+      'Training on LPG, business modeling, innovation, pitching. Mentor assignment and weekly tracking.',
+    color: '#004B87',
+  },
+  {
+    date: 'October 2025',
+    title: 'Project Development',
+    description:
+      'Teams develop MVPs, test usability, prepare pitches, and submit mid-review video + validation summary.',
+    color: '#FACC15',
+  },
+  {
+    date: 'November 2025',
+    title: 'Final Pitch & Awards',
+    description:
+      'National showcase, judges scoring, top 3 prizes awarded. Media rollout and partnership exploration.',
+    color: '#EF4444',
+  },
+  {
+    date: 'December 2025',
+    title: 'Post-Event Wrap-Up',
+    description:
+      'Incubation offers to winners. Internal debriefs, case study reports, and scale planning for 2026.',
+    color: '#00AEEF',
   },
 ];
 
 export default function TimelineSection() {
   return (
-    <Box id="timeline" sx={{ py: 12, background: 'linear-gradient(to right, #F0FDF4, #E0F7FA)' }}>
-      <Box sx={{ px: { xs: 2, md: 4 }, maxWidth: '1400px', mx: 'auto' }}>
-      <Typography
-          variant="h4"
-          align="center"
-          sx={{
-            mb: 6,
-            color: '#065f46',
-            fontWeight: 700,
-            '&::after': {
-              content: '""',
-              display: 'block',
-              width: '5%',
-              height: '4px',
-              background: '#38bdf8',
-              margin: '0 auto',
-              borderRadius: 2,
-              position: 'relative',
-              top: '0.5rem',
-            },
-          }}
-        >
-          Timeline
+    <Box
+      id="timeline"
+      sx={{
+        py: 12,
+        background: '#F0FDF4',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <Box sx={{ textAlign: 'center', mb: 8 }}>
+        <Typography variant="h4" fontWeight={700} color="#004B87">
+          GreenWells Innovation Hackathon 2025 Timeline
         </Typography>
+        <Box
+          sx={{
+            width: '60px',
+            height: '4px',
+            backgroundColor: '#00AEEF',
+            margin: '12px auto 0',
+            borderRadius: 4,
+          }}
+        />
+      </Box>
 
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          spacing={4}
-          justifyContent="center"
-          alignItems="stretch"
-        >
-          {timelineItems.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              style={{ flex: 1 }}
-            >
-              <Paper
-                elevation={4}
-                sx={{
-                  p: 4,
-                  borderRadius: 4,
-                  backgroundColor: '#FFFFFF',
-                  textAlign: 'center',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
-                    transform: 'translateY(-5px)',
-                  },
+      <Box
+        sx={{
+          position: 'relative',
+          maxWidth: 900,
+          mx: 'auto',
+          px: 2,
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '4px',
+            height: '100%',
+            backgroundColor: '#00AEEF',
+            zIndex: 0,
+          },
+        }}
+      >
+        <Stack spacing={6}>
+          {timelineItems.map((item, index) => {
+            const isLeft = index % 2 === 0;
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                style={{
+                  display: 'flex',
+                  justifyContent: isLeft ? 'flex-start' : 'flex-end',
+                  position: 'relative',
+                  zIndex: 1,
                 }}
               >
                 <Box
                   sx={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: '50%',
-                    backgroundColor: '#00AEEF',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    mx: 'auto',
-                    mb: 2,
-                    fontWeight: 700,
-                    fontSize: '1.2rem',
-                    boxShadow: '0 4px 12px rgba(0, 174, 239, 0.4)',
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: 420,
+                    px: 1,
                   }}
                 >
-                  {i + 1}
+                  {/* Circle number */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '10px',
+                      [isLeft ? 'right' : 'left']: '-38px',
+                      zIndex: 2,
+                      backgroundColor: item.color,
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '0.95rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '3px solid white',
+                      boxShadow: '0 0 0 4px #F0FDF4',
+                    }}
+                  >
+                    {index + 1}
+                  </Box>
+
+                  {/* Card with hover */}
+                  <Paper
+                    elevation={4}
+                    sx={{
+                      p: 3,
+                      borderLeft: isLeft ? '6px solid #004B87' : 'none',
+                      borderRight: !isLeft ? '6px solid #004B87' : 'none',
+                      backgroundColor: '#ffffff',
+                      borderRadius: 3,
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: `0 0 12px ${item.color}80`,
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ color: item.color, fontWeight: 600, mb: 0.5 }}
+                    >
+                      {item.date}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ color: '#004B87', fontWeight: 700, mb: 1 }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: '#374151', lineHeight: 1.6 }}
+                    >
+                      {item.description}
+                    </Typography>
+                  </Paper>
                 </Box>
-
-                <Typography
-                  variant="subtitle2"
-                  sx={{
-                    fontWeight: 600,
-                    color: '#7CD338',
-                    mb: 0.5,
-                    fontSize: '0.95rem',
-                  }}
-                >
-                  {item.date}
-                </Typography>
-
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: 700,
-                    color: '#004B87',
-                    mb: 1,
-                    fontSize: '1.1rem',
-                  }}
-                >
-                  {item.title}
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: '#374151',
-                    fontSize: '0.95rem',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {item.description}
-                </Typography>
-              </Paper>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </Stack>
       </Box>
     </Box>

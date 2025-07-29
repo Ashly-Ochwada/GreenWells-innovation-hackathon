@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -8,10 +8,15 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  TextField,
+  InputAdornment,
+  Stack,
+  useTheme,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SearchIcon from '@mui/icons-material/Search';
+import faqImage from '../assets/faq-illustration.png'; // make sure you have this
 
-// FAQ Data
 const faqItems = [
   {
     question: 'Who can participate in GreenHack 2025?',
@@ -41,72 +46,134 @@ const faqItems = [
 ];
 
 export default function FAQ() {
+  const theme = useTheme();
+  const [search, setSearch] = useState('');
+
+  const filteredFaqs = faqItems.filter((item) =>
+    item.question.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Box
       id="faq"
       sx={{
-        py: { xs: 8, md: 10 },
-        px: 2,
-        backgroundColor: '#f0f9ff',
+        py: { xs: 10, md: 12 },
+        backgroundColor: '#F0F9FF',
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography
           variant="h4"
           align="center"
           sx={{
-            mb: 6,
             fontWeight: 700,
-            color: '#0284C8',
+            color: '#004B87',
+            mb: 4,
             position: 'relative',
             '&::after': {
               content: '""',
               display: 'block',
               width: '60px',
               height: '4px',
-              background: '#58C747',
-              borderRadius: '2px',
+              backgroundColor: '#7CD338',
               margin: '0.5rem auto 0',
+              borderRadius: 2,
             },
           }}
         >
           ❓ Frequently Asked Questions
         </Typography>
 
-        {faqItems.map((item, index) => (
-          <Accordion
-            key={index}
-            sx={{
-              mb: 2,
-              borderRadius: 2,
-              backgroundColor: 'white',
-              boxShadow: '0 2px 12px rgba(2,132,200,0.08)',
-              transition: 'box-shadow 0.3s',
-              '&.Mui-expanded': {
-                boxShadow: '0 6px 20px rgba(88,199,71,0.2)',
-              },
+        {/* Search Field */}
+        {/* <Box sx={{ maxWidth: 700, mx: 'auto', mb: 6 }}>
+          <TextField
+            fullWidth
+            placeholder="Search your question..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: '#00AEEF' }} />
+                </InputAdornment>
+              ),
             }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon sx={{ color: '#0284C8' }} />}
-              sx={{
-                fontWeight: 600,
-                color: '#0284C8',
-              }}
-            >
-              {item.question}
-            </AccordionSummary>
-            <AccordionDetails
-              sx={{
-                fontSize: '0.95rem',
-                lineHeight: 1.6,
-                color: '#475569',
-              }}
-            >
-              {item.answer}
-            </AccordionDetails>
-          </Accordion>
-        ))}
+            sx={{
+              backgroundColor: '#fff',
+              borderRadius: 14,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+              '& fieldset': { border: 'none' },
+            }}
+          />
+        </Box> */}
+
+        {/* FAQ Content */}
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+          {/* Left Side Image */}
+        <Box
+          sx={{
+            flex: 1.2,
+            display: { xs: 'none', md: 'flex' },
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <img
+            src={faqImage}
+            alt="FAQ illustration"
+            style={{
+              // width: '170%',
+              maxWidth: '500px',
+              height: 'auto',
+              objectFit: 'contain',
+              transition: 'transform 0.3s ease',
+              transform: 'scale(1)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            
+          />
+        </Box>
+
+
+          {/* Right Side Accordion */}
+          <Box sx={{ flex: 2 }}>
+            {filteredFaqs.map((item, index) => (
+              <Accordion
+                key={index}
+                sx={{
+                  mb: 2,
+                  borderRadius: 2,
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                  transition: '0.3s',
+                  '&.Mui-expanded': {
+                    boxShadow: '0 6px 20px rgba(124,211,56,0.2)',
+                  },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: '#0284C8' }} />}
+                  sx={{
+                    fontWeight: 600,
+                    color: '#0284C8',
+                  }}
+                >
+                  {item.question}
+                </AccordionSummary>
+                <AccordionDetails
+                  sx={{
+                    fontSize: '0.95rem',
+                    lineHeight: 1.6,
+                    color: '#475569',
+                  }}
+                >
+                  {item.answer}
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Stack>
       </Container>
     </Box>
   );

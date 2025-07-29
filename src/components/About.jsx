@@ -10,7 +10,7 @@ export default function About() {
     <Box id="about" sx={{ position: 'relative', pt: { xs: 10, md: 16 }, background: 'linear-gradient(135deg, #E6F9FF 0%, #F3FFE6 100%)', color: '#0F172A' }}>
       
       {/* Top Wave Divider */}
-      <Box
+      {/* <Box
         component="svg"
         viewBox="0 0 1440 100"
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ export default function About() {
         }}
       >
         <path fill="#FFFFFF" d="M0,64L1440,0L1440,320L0,320Z"></path>
-      </Box>
+      </Box> */}
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
@@ -104,7 +104,7 @@ export default function About() {
                 color: '#00AEEF',
               }}
             >
-              GreenHack 2025: Innovation for a Cleaner Tomorrow
+              GreenWells Innovation Hackathon 2025: Innovation for a Cleaner Tomorrow. Fueling Innovation
             </Typography>
 
             <Typography

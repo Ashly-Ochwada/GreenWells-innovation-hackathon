@@ -19,7 +19,6 @@ const sections = ['about', 'timeline', 'prizes', 'faq'];
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  // const sections = ['about', 'timeline', 'prizes', 'faq'];
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
@@ -130,7 +129,7 @@ export default function Hero() {
 
       {/* Hero Content */}
       <Box id="about">
-        <Container sx={{ pt: 24, pb: 10, textAlign: "center" }}>
+        <Container sx={{ pt: 24, pb: 16, textAlign: "center" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +158,7 @@ export default function Hero() {
               Hackathon 2025
             </Typography>
 
-            <Typography variant="h6"sx={{ mt: 2, color: "#cbd5e1" }}>
+            <Typography variant="h6" sx={{ mt: 2, color: "#cbd5e1" }}>
               48hrs. Real challenges. Green future. 🌍✨
             </Typography>
 
@@ -229,8 +228,7 @@ export default function Hero() {
                 <Box sx={{ px: 2, py: 2, borderRadius: 5, bgcolor: "#ffffff", color: "#004B87" }}>
                   {timeLeft.minutes} Mins
                 </Box>
-                <Box sx={{ px: 2, py: 2, borderRadius: 5, bgcolor: "#ffffff", color: "#004B87"
-               }}>
+                <Box sx={{ px: 2, py: 2, borderRadius: 5, bgcolor: "#ffffff", color: "#004B87" }}>
                   {timeLeft.seconds} Secs
                 </Box>
               </Stack>
@@ -238,6 +236,37 @@ export default function Hero() {
           </motion.div>
         </Container>
       </Box>
+
+      {/* Layered Multi-Tone Wave Divider */}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          overflow: 'hidden',
+          lineHeight: 0,
+          zIndex: 1,
+        }}
+      >
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ width: '100%', height: '120px', display: 'block' }}>
+          <path
+            d="M0,0 C150,100 350,0 600,50 C850,100 1050,10 1200,60 L1200,120 L0,120 Z"
+            fill="#ffffff"
+          ></path>
+          <path
+            d="M0,20 C150,100 350,20 600,70 C850,120 1050,30 1200,80 L1200,120 L0,120 Z"
+            fill="#ecfdf5"  
+            opacity="0.6"
+          ></path>
+          <path
+            d="M0,40 C150,100 350,40 600,90 C850,140 1050,50 1200,100 L1200,120 L0,120 Z"
+            fill="#f0f9ff"  
+            opacity="0.4"
+          ></path>
+        </svg>
+      </Box>
+
     </Box>
   );
 }

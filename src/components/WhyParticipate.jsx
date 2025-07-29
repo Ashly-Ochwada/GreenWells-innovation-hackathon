@@ -4,9 +4,9 @@ import React from 'react';
 import {
   Box,
   Typography,
-  Paper,
   Container,
-  Stack
+  Stack,
+  Paper
 } from '@mui/material';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import SchoolIcon from '@mui/icons-material/School';
@@ -19,25 +19,25 @@ const features = [
     description:
       'Test your creativity and problem-solving skills by addressing real-world sustainability issues in the LPG sector.',
     icon: <EmojiObjectsIcon fontSize="large" />,
-    color: '#00AEEF', // Ocean Blue
-    bg: '#E0F7FB',
+    color: '#00AEEF',
+    bg: '#001F3F',
   },
   {
     title: 'Mentorship',
     description:
       'Learn from experienced mentors and industry leaders who will guide you throughout your innovation journey.',
     icon: <SchoolIcon fontSize="large" />,
-    color: '#7CD338', // Green Wells Green
-    bg: '#F3FFE6',
+    color: '#7CD338',
+    bg: '#001A33',
   },
   {
     title: 'Community',
     description:
       'Be part of a vibrant, eco-conscious student community and build long-lasting relationships.',
     icon: <Diversity3Icon fontSize="large" />,
-    color: '#004B87', // Navy Blue
-    bg: '#E6F2FB',
-  }
+    color: '#004B87',
+    bg: '#001326',
+  },
 ];
 
 export default function WhyParticipate() {
@@ -45,13 +45,30 @@ export default function WhyParticipate() {
     <Box
       id="participate"
       sx={{
-        py: 12,
-        background: '#004B87', // Navy Blue
+        py: 14,
+        background: 'radial-gradient(circle at 50% 10%, #0f172a, #000000)',
         color: '#FFFFFF',
-        clipPath: 'polygon(0 0, 100% 5%, 100% 100%, 0% 95%)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <Container maxWidth="lg">
+      {/* Floating Stars/Shapes Animation */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 0,
+          backgroundImage: `radial-gradient(#7CD33822 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          pointerEvents: 'none',
+          animation: 'float 10s infinite linear',
+        }}
+      />
+
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
         <Typography
           variant="h4"
           align="center"
@@ -59,6 +76,7 @@ export default function WhyParticipate() {
             mb: 6,
             fontWeight: 700,
             color: '#FFFFFF',
+            fontFamily: 'cursive',
             '&::after': {
               content: '""',
               display: 'block',
@@ -93,21 +111,21 @@ export default function WhyParticipate() {
               style={{ flex: 1 }}
             >
               <Paper
-                elevation={5}
+                elevation={8}
                 sx={{
                   p: 4,
                   height: '100%',
                   backgroundColor: item.bg,
-                  borderRadius: 4,
+                  border: `2px solid ${item.color}`,
+                  borderRadius: 6,
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
+                    transform: 'scale(1.03)',
+                    boxShadow: `0 12px 32px ${item.color}55`,
                   },
                 }}
               >
-                <Stack spacing={2} alignItems="flex-start">
-                  {/* Icon Bubble */}
+                <Stack spacing={2} alignItems="center">
                   <Box
                     sx={{
                       bgcolor: item.color,
@@ -115,7 +133,7 @@ export default function WhyParticipate() {
                       p: 1.5,
                       borderRadius: '50%',
                       display: 'inline-flex',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                     }}
                   >
                     {item.icon}
@@ -125,7 +143,7 @@ export default function WhyParticipate() {
                     variant="h6"
                     sx={{
                       fontWeight: 600,
-                      color: '#000000',
+                      color: '#FFFFFF',
                     }}
                   >
                     {item.title}
@@ -134,20 +152,27 @@ export default function WhyParticipate() {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: '#374151',
+                      color: '#CBD5E1',
                       fontSize: '0.95rem',
                       lineHeight: 1.6,
+                      textAlign: 'center'
                     }}
                   >
                     {item.description}
                   </Typography>
-
                 </Stack>
               </Paper>
             </motion.div>
           ))}
         </Stack>
       </Container>
+
+      <style jsx global>{`
+        @keyframes float {
+          0% { background-position: 0 0; }
+          100% { background-position: 100px 100px; }
+        }
+      `}</style>
     </Box>
   );
 }
