@@ -43,9 +43,6 @@ const faqItems = [
 ];
 
 export default function FAQ() {
-  const filteredFaqs = faqItems.filter((item) =>
-    item.question.toLowerCase().includes(search.toLowerCase())
-  );
 
   return (
     <Box
