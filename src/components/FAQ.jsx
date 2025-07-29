@@ -46,7 +46,6 @@ const faqItems = [
 ];
 
 export default function FAQ() {
-  const theme = useTheme();
   const [search, setSearch] = useState('');
 
   const filteredFaqs = faqItems.filter((item) =>
