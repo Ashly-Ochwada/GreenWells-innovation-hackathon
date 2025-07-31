@@ -8,7 +8,6 @@ import {
   IconButton,
   Container,
   Divider,
-  Button,
 } from '@mui/material';
 import { LinkedIn, Twitter, Instagram, YouTube } from '@mui/icons-material';
 import EmailIcon from '@mui/icons-material/Email';
