@@ -115,14 +115,14 @@ export default function About() {
                 color: '#0F172A',
               }}
             >
-              GreenHack is a dynamic 5-month national innovation challenge designed to ignite the creative potential of Kenyan university students. 
-              Our mission is to inspire, educate, and equip young innovators to tackle real-world challenges in the Liquefied Petroleum Gas (LPG) sector through scalable and eco-conscious solutions.
+              GreenHack is a bold 5-month national innovation challenge powered by Green Wells Energies, crafted to unlock the ingenuity of Kenyan university students. 
+              Our mission is to spark innovative thinking, nurture practical skills, and drive scalable solutions that address real-world challenges in the Oil and Gas sector, with a focus on sustainability, efficiency, and customer impact.
               <br /><br />
-              Hosted by GreenWells Energies, this challenge serves as a platform for forward-thinking individuals to gain hands-on experience in sustainable product development, clean energy innovation, and environmental stewardship. 
-              Participants are guided by expert mentors and exposed to industry-driven workshops, ideation bootcamps, and team-based project development sprints.
+              Rooted in Green Wells Energies’ commitment to delivering quality, innovative energy solutions, this challenge empowers student innovators to reimagine how energy can be produced, distributed, and experienced in a cleaner and smarter way.
+              Participants will engage with more than five key innovation themes, guided by industry mentors and supported through workshops, bootcamps, and project sprints.
               <br /><br />
-              Through GreenHack, students not only compete for cash prizes and career-defining exposure but also become part of a growing ecosystem of changemakers committed to a greener future.
-              This is more than a competition, it’s a movement that nurtures the next generation of tech-driven climate leaders.
+              From streamlining logistics and enhancing consumer experiences to creating youth-centric platforms and automating workflows, GreenHack invites the next generation of changemakers to take the lead in shaping a resilient and future-ready energy ecosystem.
+              More than a competition, this is a launchpad for tech-driven, sustainable impact and a movement toward Africa’s energy transformation.
             </Typography>
 
           </motion.div>
