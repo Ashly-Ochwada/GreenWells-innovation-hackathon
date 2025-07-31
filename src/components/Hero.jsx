@@ -15,7 +15,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { motion } from "framer-motion";
 
 
-const sections = ['about', 'timeline', 'prizes', 'faq'];
+const sections = ['about', 'timeline', 'prizes', 'faq',];
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -84,7 +84,7 @@ export default function Hero() {
               color="white"
               sx={{ display: { xs: 'none', sm: 'block' } }}
             >
-              Green Wells Energies
+              GreenWells Energies
             </Typography>
           </Box>
           <Stack direction="row" spacing={4} sx={{ display: { xs: "none", md: "flex" } }}>
@@ -166,7 +166,7 @@ export default function Hero() {
               variant="body1"
               sx={{ mt: 2, color: "#f0fdf4", maxWidth: 720, mx: "auto", lineHeight: 1.7 }}
             >
-              The GreenWells Innovation Hackathon is a nationwide sustainability-focused challenge that empowers university students to create scalable, eco-friendly tech solutions for real-world problems in the LPG and energy sector. Backed by Greenwell Energies and key partners, the hackathon blends hands-on innovation, mentorship, and opportunity — providing a launchpad for Kenya’s next generation of green tech leaders.
+              The GreenWells Innovation Hackathon is a nationwide sustainability-focused challenge that empowers university students to create scalable, eco-friendly tech solutions for real-world problems in the Oil and Gas sector. Backed by Greenwell Energies and key partners, the hackathon blends hands-on innovation, mentorship, and opportunity, providing a launchpad for Kenya’s next generation of green tech leaders.
             </Typography>
 
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="center" mt={4}>
