@@ -8,12 +8,21 @@ import {
   IconButton,
   Container,
   Divider,
+  SvgIcon
 } from '@mui/material';
-import { LinkedIn, Twitter, Instagram, YouTube } from '@mui/icons-material';
+import { LinkedIn, Twitter, Instagram} from '@mui/icons-material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import logo from '../assets/logo.png';
+
+function TikTokIcon(props) {
+  return (
+    <SvgIcon {...props} viewBox="0 0 24 24">
+      <path d="M12 2c.6 0 1.2.5 1.2 1.2v12.4a3.6 3.6 0 11-3.6-3.6h.6v2.2c-.7.2-1.2.8-1.2 1.5 0 .9.7 1.6 1.6 1.6s1.6-.7 1.6-1.6V2.1c0-.7.5-1.2 1.2-1.2zM15.5 2c0 2 1.6 3.6 3.6 3.6V8c-1.6 0-3.1-.6-4.2-1.7a5.7 5.7 0 01-1.6-4.1h2.2z" />
+    </SvgIcon>
+  );
+}
 
 export default function Footer() {
   return (
@@ -100,15 +109,18 @@ export default function Footer() {
       <IconButton component="a" href="https://linkedin.com" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#00AEEF' } }}>
         <LinkedIn />
       </IconButton>
-      <IconButton component="a" href="https://twitter.com" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#00AEEF' } }}>
+      <IconButton component="a" href="https://x.com/gwenergies?s=11" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#00AEEF' } }}>
         <Twitter />
       </IconButton>
-      <IconButton component="a" href="https://instagram.com" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#7CD338' } }}>
+      <IconButton component="a" href="https://www.instagram.com/greenwellsenergiesinnovation?igsh=eXNvc2NxMWhiejhx&utm_source=qr" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#7CD338' } }}>
         <Instagram />
       </IconButton>
-      <IconButton component="a" href="https://youtube.com" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#EF4444' } }}>
+      <IconButton component="a" href="https://www.tiktok.com/@greenwellsenergies?_t=ZM-8z4F9hTOYKr&_r=1" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#7CD338' } }}>
+            <TikTokIcon />
+          </IconButton>
+      {/* <IconButton component="a" href="https://youtube.com" target="_blank" rel="noopener" sx={{ color: 'white', '&:hover': { color: '#EF4444' } }}>
         <YouTube />
-      </IconButton>
+      </IconButton> */}
     </Stack>
 
     <Divider sx={{ my: 3, borderColor: 'rgba(255,255,255,0.2)' }} />

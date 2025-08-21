@@ -12,6 +12,7 @@ import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import SchoolIcon from '@mui/icons-material/School';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import { motion } from 'framer-motion';
+import { keyframes } from '@mui/system';
 
 const features = [
   {
@@ -40,60 +41,105 @@ const features = [
   },
 ];
 
+/* ===== Futuristic animations (MUI keyframes) ===== */
+const panGrid = keyframes`
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 120px 120px, 120px 120px; }
+`;
+const float = keyframes`
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-12px) }
+  100% { transform: translateY(0px) }
+`;
+const orbit = keyframes`
+  0% { transform: rotate(0deg) translateX(18px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(18px) rotate(-360deg); }
+`;
+const glowPulse = keyframes`
+  0% { box-shadow: 0 0 0 rgba(0,174,239,0), 0 0 0 rgba(124,211,56,0) }
+  50% { box-shadow: 0 0 24px rgba(0,174,239,0.25), 0 0 36px rgba(124,211,56,0.18) }
+  100% { box-shadow: 0 0 0 rgba(0,174,239,0), 0 0 0 rgba(124,211,56,0) }
+`;
+
 export default function WhyParticipate() {
   return (
     <Box
       id="participate"
       sx={{
         py: 14,
-        background: 'radial-gradient(circle at 50% 10%, #0f172a, #000000)',
-        color: '#FFFFFF',
         position: 'relative',
         overflow: 'hidden',
+        color: '#FFFFFF',
+        // Layered neon background + subtle vignette
+        background:
+          `radial-gradient(1200px 700px at -10% -10%, rgba(0,174,239,0.18), transparent 60%),
+           radial-gradient(1000px 650px at 110% 20%, rgba(124,211,56,0.16), transparent 60%),
+           radial-gradient(circle at 50% 10%, #0f172a 0%, #000000 100%)`,
+        // Neon grid overlay with pan animation
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          backgroundImage:
+            `linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)`,
+          backgroundSize: '30px 30px, 30px 30px',
+          opacity: 0.25,
+          pointerEvents: 'none',
+          animation: `${panGrid} 18s linear infinite`,
+        },
       }}
     >
-      {/* Floating Stars/Shapes Animation */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 0,
-          backgroundImage: `radial-gradient(#7CD33822 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          pointerEvents: 'none',
-          animation: 'float 10s infinite linear',
-        }}
-      />
+      {/* Floating blobs */}
+      <Box sx={{
+        position: 'absolute', top: 0, left: '8%',
+        width: 200, height: 200, borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(124,211,56,0.45), transparent 60%)',
+        filter: 'blur(22px)', animation: `${float} 8s ease-in-out infinite`, zIndex: 0
+      }}/>
+      <Box sx={{
+        position: 'absolute', bottom: 0, right: '12%',
+        width: 260, height: 260, borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0,174,239,0.35), transparent 60%)',
+        filter: 'blur(24px)', animation: `${float} 9s ease-in-out infinite`, animationDelay: '0.6s', zIndex: 0
+      }}/>
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+        {/* Heading */}
         <Typography
           variant="h4"
           align="center"
           sx={{
             mb: 6,
-            fontWeight: 700,
+            fontWeight: 800,
             color: '#FFFFFF',
-            '&::after': {
-              content: '""',
-              display: 'block',
-              width: '60px',
-              height: '4px',
-              backgroundColor: '#7CD338',
-              margin: '0.5rem auto 0',
-              borderRadius: 2,
-            },
+            textShadow: '0 6px 24px rgba(0,0,0,0.35)',
           }}
         >
           Why You Should{' '}
-          <Box component="span" sx={{ color: '#7CD338' }}>
+          <Box
+            component="span"
+            sx={{
+              background: 'linear-gradient(90deg, #00AEEF, #7CD338)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 900,
+            }}
+          >
             Participate
           </Box>{' '}
           in GreenHack
         </Typography>
+        <Box
+          sx={{
+            width: 64, height: 4, mx: 'auto', mb: 4,
+            borderRadius: 4,
+            background: 'linear-gradient(90deg, #00AEEF, #7CD338)',
+            animation: `${glowPulse} 6s ease-in-out infinite`,
+          }}
+        />
 
+        {/* Feature Cards */}
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           spacing={4}
@@ -105,8 +151,8 @@ export default function WhyParticipate() {
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: index * 0.18 }}
               style={{ flex: 1 }}
             >
               <Paper
@@ -114,17 +160,32 @@ export default function WhyParticipate() {
                 sx={{
                   p: 4,
                   height: '100%',
-                  backgroundColor: item.bg,
-                  border: `2px solid ${item.color}`,
-                  borderRadius: 6,
+                  borderRadius: 4,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background:
+                    'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
+                  border: `1px solid ${item.color}55`,
+                  boxShadow: `0 10px 30px ${item.color}26`,
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  backdropFilter: 'blur(6px)',
                   '&:hover': {
-                    transform: 'scale(1.03)',
-                    boxShadow: `0 12px 32px ${item.color}55`,
+                    transform: 'translateY(-6px)',
+                    boxShadow: `0 16px 40px ${item.color}66`,
+                  },
+                  // soft conic glow
+                  '&:before': {
+                    content: '""',
+                    position: 'absolute',
+                    inset: -2,
+                    background: `conic-gradient(from 0deg, ${item.color}, transparent 40%, ${item.color})`,
+                    opacity: 0.08,
+                    pointerEvents: 'none',
                   },
                 }}
               >
-                <Stack spacing={2} alignItems="center">
+                {/* Icon badge with orbiting particle */}
+                <Box sx={{ position: 'relative', display: 'inline-flex', mb: 2 }}>
                   <Box
                     sx={{
                       bgcolor: item.color,
@@ -132,46 +193,51 @@ export default function WhyParticipate() {
                       p: 1.5,
                       borderRadius: '50%',
                       display: 'inline-flex',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                      boxShadow: '0 8px 22px rgba(0,0,0,0.25)',
                     }}
                   >
                     {item.icon}
                   </Box>
-
-                  <Typography
-                    variant="h6"
+                  <Box
+                    aria-hidden
                     sx={{
-                      fontWeight: 600,
-                      color: '#FFFFFF',
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: 6,
+                      height: 6,
+                      borderRadius: '50%',
+                      background: '#fff',
+                      filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.65))',
+                      transformOrigin: 'center -18px',
+                      animation: `${orbit} 6s linear infinite`,
                     }}
-                  >
-                    {item.title}
-                  </Typography>
+                  />
+                </Box>
 
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: '#CBD5E1',
-                      fontSize: '0.95rem',
-                      lineHeight: 1.6,
-                      textAlign: 'center'
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </Stack>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 800, color: '#FFFFFF', mb: 1 }}
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#CBD5E1',
+                    fontSize: '0.98rem',
+                    lineHeight: 1.65,
+                    textAlign: 'center',
+                  }}
+                >
+                  {item.description}
+                </Typography>
               </Paper>
             </motion.div>
           ))}
         </Stack>
       </Container>
-
-      <style jsx global>{`
-        @keyframes float {
-          0% { background-position: 0 0; }
-          100% { background-position: 100px 100px; }
-        }
-      `}</style>
     </Box>
   );
 }
