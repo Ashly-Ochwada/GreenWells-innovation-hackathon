@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -13,6 +13,7 @@ import {
   Stack,
   Badge,
   Divider,
+  Button
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
@@ -145,9 +146,8 @@ function Highlight({ text, query }) {
 
 export default function FAQ() {
   const [search, setSearch] = useState('');
-  const [expandedAll, setExpandedAll] = useState(false);
 
-  // Filter questions inside categories
+  // 1) Filter questions inside categories (unchanged logic)
   const filtered = useMemo(() => {
     if (!search.trim()) return FAQ_CATEGORIES;
     const s = search.toLowerCase();
@@ -159,8 +159,43 @@ export default function FAQ() {
     })).filter((cat) => cat.items.length > 0);
   }, [search]);
 
-  const visibleCount =
-    filtered.reduce((sum, c) => sum + c.items.length, 0) || 0;
+  // Keys of categories currently visible after filtering
+  const visibleKeys = useMemo(() => filtered.map((c) => c.key), [filtered]);
+
+  // 2) Controlled accordion state: which category keys are expanded
+  const [expandedKeys, setExpandedKeys] = useState(() =>
+    visibleKeys.length ? [visibleKeys[0]] : []
+  );
+
+  // 3) Keep expansions intuitive when search changes:
+  //    - If searching, open all visible categories
+  //    - If not searching, open just the first visible category
+  useEffect(() => {
+    if (search.trim()) {
+      setExpandedKeys(visibleKeys);
+    } else {
+      setExpandedKeys(visibleKeys.length ? [visibleKeys[0]] : []);
+    }
+  }, [search, visibleKeys]);
+
+  const visibleCount = filtered.reduce((sum, c) => sum + c.items.length, 0) || 0;
+
+  // 4) Accordion change handler (per category)
+  const handleAccordionChange = (key) => (_event, isExpanded) => {
+    setExpandedKeys((prev) => {
+      if (isExpanded) {
+        // add this key
+        if (prev.includes(key)) return prev;
+        return [...prev, key];
+      }
+      // remove this key
+      return prev.filter((k) => k !== key);
+    });
+  };
+
+  // 5) Expand/Collapse buttons act on visible categories only
+  const expandAllVisible = () => setExpandedKeys(visibleKeys);
+  const collapseAll = () => setExpandedKeys([]);
 
   return (
     <Box
@@ -248,10 +283,11 @@ export default function FAQ() {
             />
           </Box>
 
-          {/* <Stack direction="row" spacing={1} justifyContent="center">
+          {/* Expand/Collapse All controls */}
+          <Stack direction="row" spacing={1} justifyContent="center">
             <Button
               variant="outlined"
-              onClick={() => setExpandedAll(true)}
+              onClick={expandAllVisible}
               sx={{
                 borderRadius: '999px',
                 borderColor: 'rgba(0,174,239,0.35)',
@@ -263,7 +299,7 @@ export default function FAQ() {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => setExpandedAll(false)}
+              onClick={collapseAll}
               sx={{
                 borderRadius: '999px',
                 borderColor: 'rgba(0,174,239,0.35)',
@@ -273,12 +309,12 @@ export default function FAQ() {
             >
               Collapse All
             </Button>
-          </Stack> */}
+          </Stack>
         </Stack>
 
         {/* Content */}
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
-          {/* Left illustration with glow */}
+          {/* Left illustration */}
           <Box
             sx={{
               flex: 1.2,
@@ -315,9 +351,8 @@ export default function FAQ() {
             />
           </Box>
 
-          {/* Right: Category Accordions */}
+          {/* Right: Category Accordions (fully controlled) */}
           <Box sx={{ flex: 2 }}>
-            {/* If searching, show a quick result count */}
             {search && (
               <Typography sx={{ mb: 1, color: '#004B87' }}>
                 Showing <strong>{visibleCount}</strong> result{visibleCount !== 1 ? 's' : ''} across{' '}
@@ -325,13 +360,13 @@ export default function FAQ() {
               </Typography>
             )}
 
-            {filtered.map((cat, i) => {
+            {filtered.map((cat) => {
               const questionCount = cat.items.length;
               return (
                 <Accordion
                   key={cat.key}
-                  defaultExpanded={search ? true : i === 0} // open first by default; open matches when searching
-                  expanded={expandedAll ? true : undefined}
+                  expanded={expandedKeys.includes(cat.key)}
+                  onChange={handleAccordionChange(cat.key)}
                   sx={{
                     mb: 2.5,
                     borderRadius: 3,
@@ -379,26 +414,16 @@ export default function FAQ() {
                     />
                   </AccordionSummary>
 
-                  <AccordionDetails
-                    sx={{ pt: 0, pb: 1, background: 'rgba(240,249,255,0.5)' }}
-                  >
+                  <AccordionDetails sx={{ pt: 0, pb: 1, background: 'rgba(240,249,255,0.5)' }}>
                     {cat.items.map(({ q, a }, idx) => (
                       <Box key={idx} sx={{ py: 1.25 }}>
-                        <Typography
-                          sx={{
-                            fontWeight: 700,
-                            color: '#0f172a',
-                            mb: 0.5,
-                          }}
-                        >
+                        <Typography sx={{ fontWeight: 700, color: '#0f172a', mb: 0.5 }}>
                           <Highlight text={q} query={search} />
                         </Typography>
                         <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>
                           <Highlight text={a} query={search} />
                         </Typography>
-                        {idx < cat.items.length - 1 && (
-                          <Divider sx={{ mt: 1.25, opacity: 0.25 }} />
-                        )}
+                        {idx < cat.items.length - 1 && <Divider sx={{ mt: 1.25, opacity: 0.25 }} />}
                       </Box>
                     ))}
                   </AccordionDetails>
@@ -423,7 +448,8 @@ export default function FAQ() {
                   No results
                 </Typography>
                 <Typography sx={{ color: '#0f172a' }}>
-                  Try different keywords like <em>eligibility</em>, <em>deadline</em>, <em>team</em>, <em>judging</em>, or <em>IP</em>.
+                  Try different keywords like <em>eligibility</em>, <em>deadline</em>, <em>team</em>,{' '}
+                  <em>judging</em>, or <em>IP</em>.
                 </Typography>
               </Box>
             )}
