@@ -10,14 +10,14 @@ const timelineItems = [
     date: 'July 2025',
     title: 'Launch & Recruitment',
     description:
-      'Website setup, campaign launch, proposal submissions. Outreach to universities.',
+      'Campaign launch, and proposal submissions.',
     color: '#00AEEF',
   },
   {
     date: 'August 2025',
     title: 'Selection & Onboarding',
     description:
-      'Proposal review, orientation webinar, team documentation, and welcome kits.',
+      'Proposal submissions, orientation webinar, team documentation, and welcome kits.',
     color: '#7CD338',
   },
   {
@@ -38,7 +38,7 @@ const timelineItems = [
     date: 'November 2025',
     title: 'Final Pitch & Awards',
     description:
-      'National showcase, judges scoring, top 3 prizes awarded. Media rollout and partnership exploration.',
+      'Proposal review, national showcase, judges scoring, top 3 prizes awarded. Media rollout and partnership exploration.',
     color: '#EF4444',
   },
   {

@@ -287,7 +287,7 @@ export default function Hero() {
               variant="h6"
               sx={{ mt: 1.5, color: "#cbe8ff", opacity: 0.95 }}
             >
-              48hrs. Real challenges. Green future. —{" "}
+              3 months. Real challenges. Green future. —{" "}
               <Box component="span" sx={{ color: "#7CD338", fontWeight: 700 }}>
                 {keywords[kwIndex]}
               </Box>
